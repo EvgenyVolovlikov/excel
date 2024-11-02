@@ -4,12 +4,15 @@ import tseslint from 'typescript-eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = [
-	{ files: ['**/*.{js,mjs,cjs,ts}'] },
-	{ languageOptions: { globals: globals.browser } },
 	{
+		files: ['**/*.{js,mjs,cjs,ts}'],
+		languageOptions: { globals: globals.browser },
 		rules: {
 			semi: 'error',
 		},
+		ignores: [
+			'node_modules/*',
+		],
 	},
 	pluginJs.configs.recommended,
 	...tseslint.configs.recommended,
