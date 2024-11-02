@@ -3,15 +3,16 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { Configuration as WebpackConfiguration } from 'webpack';
+import { Configuration as IWebpackDevServerConfiguration } from 'webpack-dev-server';
 
-const isProd = process.env.NODE_ENV === 'production';
-const isDev = !isProd;
-const port = 3000;
+const isProd: boolean = process.env.NODE_ENV === 'production';
+const isDev: boolean = !isProd;
+const port: number = 3000;
 
-const modes = {
-	dev: 'development',
-	prod: 'production',
-};
+interface IWebpackConfiguration extends WebpackConfiguration {
+	devServer?: IWebpackDevServerConfiguration;
+}
 
 const filename = (ext: string) =>
 	isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`;
@@ -29,10 +30,10 @@ const jsLoaders = () => {
 	return loaders;
 };
 
-export default () => {
+export default (): IWebpackConfiguration => {
 	return {
 		context: path.resolve(__dirname, 'src'),
-		mode: modes.dev,
+		mode: 'development',
 		entry: ['@babel/polyfill', './index.ts'],
 		output: {
 			filename: filename('js'),
