@@ -1,10 +1,10 @@
 import path from 'path';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { Configuration as WebpackConfiguration } from 'webpack';
-import { Configuration as IWebpackDevServerConfiguration } from 'webpack-dev-server';
+import {Configuration as WebpackConfiguration} from 'webpack';
+import {Configuration as IWebpackDevServerConfiguration} from 'webpack-dev-server';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
 const isDev: boolean = !isProd;
@@ -23,6 +23,7 @@ const jsLoaders = () => {
 			loader: 'babel-loader',
 			options: {
 				presets: ['@babel/preset-env'],
+				plugins: ['@babel/plugin-proposal-class-properties'],
 			},
 		},
 	];
@@ -42,7 +43,7 @@ export default (): IWebpackConfiguration => {
 		resolve: {
 			extensions: ['.js', '.ts'],
 			alias: {
-				'@': path.resolve(__dirname, 'src'),
+				'@src': path.resolve(__dirname, 'src'),
 				'@core': path.resolve(__dirname, 'src/core'),
 			},
 		},
