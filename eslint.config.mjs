@@ -6,13 +6,13 @@ import tseslint from 'typescript-eslint';
 const config = [
 	{
 		files: ['**/*.{js,mjs,cjs,ts}'],
-		languageOptions: { globals: globals.browser },
+		languageOptions: {globals: globals.browser},
 		rules: {
 			semi: 'error',
+			indent: ['error', 'tab'],
+			'no-unused-vars': 'error',
 		},
-		ignores: [
-			'node_modules/*',
-		],
+		ignores: ['node_modules/*'],
 	},
 	pluginJs.configs.recommended,
 	...tseslint.configs.recommended,
